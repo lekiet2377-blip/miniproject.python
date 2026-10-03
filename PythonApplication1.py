@@ -1,120 +1,75 @@
-﻿#Bài 1
-#TODO 1
-#tuoi = int(input("Nhập tuổi: "))
-#if tuoi <13:
-    #print("Thiếu nhi")
-#elif tuoi >=13 and tuoi <=17:
-    #print("Thiếu niên")
-#elif tuoi >=18 and tuoi <=64:
-    #print("Người lớn")
-#else:
-    #print("Người cao tuổi")
-#TODO 2
-#diem = float(input("Nhập điểm: "))
-#if diem >= 9:
-    #print("Xuất sắc")
-#elif diem >=8:
-    #print("Giỏi")
-#elif diem >=6.5:
-    #print("Khá")
-#elif diem >=5:
-    #print("Trung bình")
-#else:
-    #print("Yếu")
-#TODO 3
-#nam = int(input("Nhập năm: "))
-#if nam % 400 == 0 or (nam % 4 == 0 and nam % 100 !=0):
-    #print("Năm nhuận")
-#else:
-    #print("Không nhuận")
-#TODO 4
-#so1 = int(input("Nhập số 1: "))
-#so2 = int(input("Nhập số 2: "))
-#so3 = int(input("Nhập số 3: "))
-#if so1>so2 and so1>so3:
-    #print(f"Số lớn nhất là: {so1}")
-#elif so2>so1 and so2>so3:
-    #print(f"Số lớn nhất là: {so2}")
-#else:
-    #print(f"Số lớn nhất là: {so3}")
-#Bài 2
-#TODO 1
-#tuoi = int(input("Nhập tuổi: "))
-#banglai = input("Có bằng lái không(Y/N): ")
-#khongsay = input("Có tỉnh táo không(Y/N): ")
-#if tuoi >= 18 and (banglai.lower()== "y" and khongsay.lower() == "y"):
-    #print("Đủ điều kiện lái xe")
-#else:
-    #print("Không đủ điều kiện lái xe")
-#TODO 2
-#a = float(input("Nhập cạnh a: "))
-#b = float(input("Nhập cạnh b: "))
-#c = float(input("Nhập cạnh c: "))
-#if a + b > c and a + c >b and b + c > a:
-    #print("Tạo thành tam giác")
-#else:
-    #print("Không tạo thành tam giác")
-    #exit()
-#if a==b==c:
-    #print("Tam giác đều")
-#elif a == b or b == c or a == c:
-    #print("Tam giác cân")
-#else:
-    #print("Tam giác thường")
-#TODO 3
-#mk =  input("Nhập mật khẩu: ")
-#if (len(mk)>=8 and any(n.isupper() for n in mk) and any(n.islower() for n in mk) and any(n.isdigit() for n in mk)):
-    #print("Mật khẩu mạnh")
-#else:
-    #print("Mật khẩu yếu")
-#TODO 4
-#n = int(input("Nhập số: "))
-#if n % 3 == 0 and n % 5 == 0:
-    #print("FizzBuzz")
-#elif n % 3 == 0:
-    #print("Fizz")
-#elif n % 5 == 0:
-    #print("Buzz")
-#else:
-    #print(f"{n}")
-#Bai 3
-#TODO 1
-#sodu = int(input("Nhập số dư: "))
-#rut = int(input("Nhập số tiền muốn rút: "))
-#if rut > 0 and sodu >= rut and rut % 50000 == 0:
-    #print("Rút thành công")
-#else:
-    #print("Rút không thành công")
-#TODO 2
-#chieucao = float(input("Nhập chiều cao: "))
-#cannang = int(input("Nhập cân nặng: "))
-#BMI = cannang / (chieucao**2)
-#if BMI < 18.5:
-    #print("Thiếu cân")
-#elif BMI >=18.5 and BMI <=24.9:
-    #print("Cân đối")
-#elif BMI >= 25 and BMI <=29.9:
-    #print("Thừa cân")
-#else:
-    #print("Béo phì")
-#TODO 3
-ve = input("Loại vé (thuong/vip): ")
-ngay = input("ngày (thuong/cuoi_tuan): ")
-tuoi = int(input("Nhập tuổi: "))
-if ve.lower() == "thuong":
-    gia = 80000
-elif ve.lower() == "vip":
-    gia = 120000
-if ngay.lower() == "cuoi_tuan":
-    gia *= 1.3
-if tuoi < 12 and tuoi >=65:
-    gia *= 0.5
-elif tuoi >= 18 and tuoi <= 25:
-    gia *= 0.2
-print(f"Giá vé là: ",int({gia}))
-
-
-
-
-
-
+import tkinter as tk
+import random
+window = tk.Tk()
+window.title("Snake Game")
+window.geometry("800x600")
+kg = tk.Canvas(window, width=800, height=600, bg="black")
+kg.pack()
+snake_x = 390
+snake_y = 290
+than_ran = []
+than_ran.append((370,290))
+than_ran.append((350,290))
+than_2_x = than_ran[1][0]
+than_2_y = than_ran[1][1]
+than_2 = kg.create_rectangle(than_2_x, than_2_y, than_2_x + 20, than_2_y + 20, fill = "green")
+than_x = than_ran[0][0]
+than_y = than_ran[0][1]
+than = kg.create_rectangle(than_x, than_y, than_x + 20, than_y + 20, fill = "green")
+than_hinh = [than, than_2]
+snake = kg.create_rectangle(snake_x,snake_y,snake_x + 20,snake_y + 20, fill = "green")
+food_x = random.randrange(0,800,20)
+food_y = random.randrange(0,600,20)
+food = kg.create_oval(food_x, food_y, food_x + 20, food_y + 20, fill = "red")
+huong = "right"
+def move_snake():
+    global snake_x,snake_y, snake
+    global food_x, food_y, food
+    kg.delete(snake)
+    cu_x = snake_x
+    cu_y = snake_y
+    if huong == "right":
+        snake_x += 20
+    elif huong == "left":
+        snake_x -= 20
+    elif huong == "up":
+        snake_y -= 20
+    elif huong == "down":
+        snake_y += 20
+    if snake_x < 0 or snake_x >= 800 or snake_y < 0 or snake_y >= 600:
+        print("Game Over!")
+        return
+    if (snake_x <= food_x + 20 and
+        snake_x + 20 >= food_x and
+        snake_y <= food_y + 20 and
+        snake_y + 20 >= food_y):
+        print("Da an!")
+        kg.delete(food)
+        food_x = random.randrange(0,800,20)
+        food_y = random.randrange(0,600,20)
+        food = kg.create_oval(food_x, food_y, food_x + 20, food_y + 20, fill = "red")
+        than_ran.append(than_ran[-1])
+        than_moi_x = than_ran[-1][0]
+        than_moi_y = than_ran[-1][1]
+        than_moi = kg.create_rectangle(than_moi_x, than_moi_y, than_moi_x + 20, than_moi_y + 20, fill = "green")
+        than_hinh.append(than_moi)
+    for i in range(len(than_ran) -1, 0, -1):
+        than_ran[i] = than_ran[i-1]
+    than_ran[0]= (cu_x, cu_y)
+    for i in range(len(than_ran)):
+        kg.coords(than_hinh[i], than_ran[i][0], than_ran[i][1], than_ran[i][0] + 20, than_ran[i][1] + 20)
+    snake = kg.create_rectangle(snake_x,snake_y,snake_x + 20,snake_y + 20, fill = "green")
+    window.after(100, move_snake)
+def di_chuyen(event):
+    global huong
+    if event.keysym == "Right" and huong != "left":
+        huong = "right"
+    elif event.keysym == "Left" and huong != "right":
+        huong = "left"
+    elif event.keysym == "Up" and huong != "down":
+        huong = "up"
+    elif event.keysym == "Down" and huong != "up":
+        huong = "down"
+window.bind("<Key>",di_chuyen)
+move_snake()
+window.mainloop()
